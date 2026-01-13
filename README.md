@@ -39,8 +39,8 @@ I am a hands-on data leader with 15+ years of experience building and modernizin
 
 ### 📫 Let's Connect
 - **Email:** [samarbhattarai@gmail.com](mailto:samarbhattarai@gmail.com)
-- **LinkedIn:** [linkedin.com/in/sambhattarai](https://linkedin.com/in/sambhattarai)
-- **Portfolio:** [yourdomain.com](https://yourdomain.com)
+- **LinkedIn:** [linkedin.com/in/sambhattarai](https://linkedin.com/in/samarbhattarai)
+- **PDF Resume:** [yourdomain.com](https://https://linkedin.com/in/samarbhattarai)
 
 ---
 *“I bridge the gap between executive strategy and production-ready code.”*
