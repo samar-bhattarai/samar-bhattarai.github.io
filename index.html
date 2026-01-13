@@ -3,735 +3,618 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Samar Bhattarai | Data & Platform Engineering Portfolio</title>
-  <meta name="description" content="Hands-on Principal Data Engineering Leader. Large-scale data platforms, cloud migrations, observability systems, and applied ML." />
+  <title>Samar Bhattarai | Principal Data Engineering Leader</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
-      --bg: #f8fafc;
-      --panel: #ffffff;
-      --border: #e5e7eb;
-      --text: #0f172a;
-      --muted: #334155;
-      --muted2: #475569;
+      --bg: #ffffff;
+      --surface: #fcfcfc;
+      --primary: #0f172a;
+      --secondary: #64748b;
       --accent: #2563eb;
-      --accent2: #1d4ed8;
+      --border: #e2e8f0;
+      --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --mono-bg: #f1f5f9;
     }
-    * { box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
-    header { padding: 3.5rem 6rem 2.5rem; background: linear-gradient(135deg, #eff6ff, #ffffff); border-bottom: 1px solid var(--border); }
-    h1 { font-size: 3rem; margin: 0 0 0.5rem; }
-    .subtitle { color: var(--muted); margin: 0.25rem 0 1rem; max-width: 950px; }
-    .links a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
 
-    nav { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-    nav .inner { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 0.9rem 6rem; }
-    nav a { color: var(--accent2); text-decoration: none; font-size: 0.95rem; padding: 0.35rem 0.55rem; border-radius: 10px; }
-    nav a:hover { background: rgba(147,197,253,0.12); }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--primary); margin: 0; line-height: 1.6; }
 
-    section { padding: 3rem 6rem; border-bottom: 1px solid var(--border); }
-    h2 { color: var(--accent); margin: 0 0 1rem; }
-    h3 { color: var(--accent2); margin: 1.5rem 0 0.75rem; }
-    p { max-width: 980px; line-height: 1.65; color: var(--muted); }
-    ul { max-width: 980px; line-height: 1.65; color: var(--muted); }
+    /* Typography */
+    h1, h2, h3 { font-weight: 700; letter-spacing: -0.025em; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background: var(--mono-bg); padding: 2px 6px; border-radius: 6px; border: 1px solid #e5e7eb; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
-    .card { background: var(--panel); padding: 1.25rem 1.25rem 1.1rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 2px 6px rgba(15,23,42,0.06); }
-    .card p { margin: 0.5rem 0; }
+    /* Layout */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-    .tag { display: inline-block; background: #eff6ff; color: var(--accent2); padding: 0.32rem 0.6rem; margin: 0.2rem 0.25rem 0 0; border-radius: 999px; font-size: 0.82rem; border: 1px solid #dbeafe; }
+    /* Header */
+    header { padding: 5rem 0 3rem; background: linear-gradient(to bottom, #f8fafc, #ffffff); border-bottom: 1px solid var(--border); }
+    .hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; }
+    .hero-text h1 { font-size: 3.5rem; margin: 0; }
+    .hero-text p { font-size: 1.25rem; color: var(--secondary); margin: 0.5rem 0 1.5rem; }
+    .hero-links a { margin-right: 1.5rem; text-decoration: none; color: var(--accent); font-weight: 600; display: inline-flex; gap: 0.5rem; align-items: center; }
+    .hero-links a:hover { text-decoration: underline; }
 
-    .kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem; }
-    .kpi .pill { border: 1px solid rgba(147,197,253,0.15); border-radius: 14px; padding: 0.85rem 1rem; background: rgba(17,24,39,0.55); }
-    .kpi .pill .big { font-size: 1.2rem; color: #e5e7eb; font-weight: 650; }
-    .kpi .pill .small { font-size: 0.92rem; color: var(--muted2); margin-top: 0.25rem; }
+    /* Navigation */
+    nav { position: sticky; top: 0; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; padding: 0.75rem 0; }
+    nav .container { display: flex; gap: 1.25rem; overflow-x: auto; }
+    nav a { text-decoration: none; color: var(--secondary); font-size: 0.9rem; font-weight: 600; transition: color 0.2s; white-space: nowrap; }
+    nav a:hover { color: var(--accent); }
 
-    .diagram { margin: 1rem 0 0.75rem; overflow-x: auto; }
-    .diagram svg { width: 980px; max-width: 100%; height: auto; display: block; }
-    .caption { color: var(--muted2); font-size: 0.92rem; margin-top: 0.35rem; }
+    /* Section */
+    section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 2rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 10px; }
+    h2 i { color: var(--accent); font-size: 1.35rem; }
 
-    .twoCol { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.25rem; align-items: start; }
-    @media (max-width: 980px) { .twoCol { grid-template-columns: 1fr; } header, section, nav .inner, footer { padding: 2rem 6rem; color: var(--muted2); background: #f1f5f9; } }
+    /* KPI */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    .kpi-card { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 1px 0 rgba(15,23,42,0.02); }
+    .kpi-value { font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .kpi-label { font-size: 0.85rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; margin-top: 6px; letter-spacing: 0.06em; }
 
-    details { border: 1px solid #dbeafe; border-radius: 14px; padding: 0.85rem 1rem; background: #f8fafc; max-width: 980px; }
-    summary { cursor: pointer; color: #e5e7eb; font-weight: 600; }
-    details p, details ul { margin-top: 0.75rem; }
+    /* Project Blocks */
+    .project-block { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; align-items: start; }
+    .project-content h3 { font-size: 1.5rem; margin-top: 0; }
 
-    footer { padding: 2rem 6rem; color: var(--muted2); }
-    a { color: var(--accent); }
+    .tag-cloud { margin: 1rem 0 1.25rem; }
+    .tag { background: #eff6ff; color: #1e40af; padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; margin: 0 6px 6px 0; display: inline-block; border: 1px solid #dbeafe; }
+
+    /* Diagram Box */
+    .diagram-box { background: #0f172a; border-radius: 16px; padding: 1.25rem; box-shadow: var(--card-shadow); color: white; overflow: hidden; }
+    .diagram-box svg { width: 100%; height: auto; display: block; }
+    .diagram-caption { font-size: 0.85rem; color: var(--secondary); margin-top: 1rem; text-align: center; font-style: italic; }
+
+    /* Callouts */
+    .callout { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; }
+    .callout strong { color: var(--primary); }
+
+    details { border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1rem; background: #ffffff; }
+    summary { cursor: pointer; font-weight: 700; color: var(--primary); }
+
+    /* Footer */
+    footer { padding: 3rem 0; text-align: center; color: var(--secondary); font-size: 0.9rem; }
+
+    @media (max-width: 900px) {
+      .hero-text h1 { font-size: 2.6rem; }
+      .project-block { grid-template-columns: 1fr; gap: 2rem; }
+      .hero { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
 
-<header id="top">
-  <h1>Samar Bhattarai</h1>
-  <p class="subtitle">Hands-on Principal Data Engineering & Platform Leader • Cloud Migration • Observability Platforms • Applied ML</p>
-  <div class="links">
-    <a href="mailto:samarbhattarai@gmail.com">samarbhattarai@gmail.com</a>
-    <a href="https://linkedin.com/in/sambhattarai" target="_blank" rel="noreferrer">LinkedIn</a>
+<header>
+  <div class="container">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Samar Bhattarai</h1>
+        <p>Principal Data Engineering & Analytics Leader</p>
+        <div class="hero-links">
+          <a href="mailto:samarbhattarai@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+          <a href="https://linkedin.com/in/sambhattarai" target="_blank" rel="noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="#" title="Replace with a hosted PDF link"><i class="fas fa-file-pdf"></i> Download CV</a>
+        </div>
+      </div>
+      <div class="kpi-label">Dallas–Fort Worth, TX</div>
+    </div>
   </div>
 </header>
 
 <nav>
-  <div class="inner">
-    <a href="#overview">Overview</a>
-    <a href="#footprint">Architecture Footprint</a>
-    <a href="#dart">DART</a>
-    <a href="#ml">Churn & Billing ML</a>
-    <a href="#omni">Omni-Channel Analytics</a>
-    <a href="#gcs">Global Cookie Sharing</a>
-    <a href="#migration">Cloud Migration & Microservices</a>
-    <a href="#walkthrough">System Design Walkthrough</a>
-  </div>
+  <div class="container">
+    <a href="#impact">Impact</a>
+    <a href="#modernization">Cloud Modernization</a>
+    <a href="#observability">Observability (DART)</a>
+    <a href="#ml">Predictive ML</a>
+    <a href="#omni">Omni-Channel</a>
+    <a href="#gcs">GCS</a></div>
 </nav>
 
-<section id="overview">
-  <h2>Overview</h2>
-  <p>
-    I build data-intensive platforms end-to-end: from database engineering and high availability to cloud-native data warehouses,
-    observability pipelines, and applied machine learning used in customer-facing decisions. I operate as a player-coach—owning
-    architecture, writing production code, and driving outcomes with engineering, product, and SRE teams.
-  </p>
+<div class="container">
 
-  <div class="kpi">
-    <div class="pill"><div class="big">50+ databases migrated</div><div class="small">Oracle & SQL Server → AWS RDS/Aurora (PostgreSQL/Oracle)</div></div>
-    <div class="pill"><div class="big">100K+ users supported</div><div class="small">Enterprise analytics & operational platforms</div></div>
-    <div class="pill"><div class="big">>10% churn reduction</div><div class="small">Decile scoring + predictive modeling</div></div>
-    <div class="pill"><div class="big">~20% call reduction</div><div class="small">Billing friction prediction + proactive messaging</div></div>
-  </div>
+  <section id="impact">
+    <h2><i class="fas fa-chart-line"></i> Executive Impact</h2>
 
-  <p class="caption">Note: For confidentiality, this portfolio focuses on architectures, patterns, and measurable outcomes rather than proprietary datasets or code.</p>
-</section>
-
-<section id="footprint">
-  <h2>System Architecture Footprint</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Data Platforms</h3>
-      <p>Snowflake • Amazon Redshift • S3 • PostgreSQL • Oracle • SQL Server • Cassandra</p>
-      <div>
-        <span class="tag">Data modeling</span><span class="tag">ETL/ELT</span><span class="tag">Warehouse design</span><span class="tag">Cost optimization</span>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-value">50+</div>
+        <div class="kpi-label">Databases Migrated</div>
       </div>
-    </div>
-    <div class="card">
-      <h3>Streaming & Integration</h3>
-      <p>Kafka • NiFi • Fluentd • Logstash • OpenSearch/Elasticsearch</p>
-      <div>
-        <span class="tag">Batch + streaming</span><span class="tag">Event pipelines</span><span class="tag">Backpressure</span>
+      <div class="kpi-card">
+        <div class="kpi-value">40%</div>
+        <div class="kpi-label">TCO Reduction</div>
       </div>
-    </div>
-    <div class="card">
-      <h3>Observability & Ops</h3>
-      <p>Splunk • Dynatrace • Glassbox • Grafana • Kibana • Slack automation</p>
-      <div>
-        <span class="tag">Anomaly detection</span><span class="tag">Alert routing</span><span class="tag">SLO/SLA</span>
+      <div class="kpi-card">
+        <div class="kpi-value">20%</div>
+        <div class="kpi-label">Call Volume Saved</div>
       </div>
-    </div>
-    <div class="card">
-      <h3>Reliability & HA</h3>
-      <p>Oracle RAC • Data Guard • GoldenGate • SharePlex • Cross-region replication</p>
-      <div>
-        <span class="tag">DR design</span><span class="tag">Failover</span><span class="tag">Zero/low downtime</span>
-      </div>
-    </div>
-    <div class="card">
-      <h3>ML & Analytics</h3>
-      <p>Python • PyTorch • SQL • Feature pipelines • Decile scoring</p>
-      <div>
-        <span class="tag">Churn</span><span class="tag">Billing friction</span><span class="tag">Operational signals</span>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Cloud</h3>
-      <p>AWS: RDS • Aurora • Redshift • S3 • EC2 (plus regulated governance patterns)</p>
-      <div>
-        <span class="tag">Migration</span><span class="tag">Security</span><span class="tag">Compliance</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== DART ===================== -->
-<section id="dart">
-  <h2>DART — Digital Alert & Reporting Technology</h2>
-
-  <div class="twoCol">
-    <div class="card">
-      <h3>What it is</h3>
-      <p>
-        DART is a Python-based real-time observability and alerting framework built to detect anomalies across key customer journeys.
-        It aggregates signals from multiple logging and monitoring platforms, normalizes events, scores anomalies, and automatically routes
-        alerts to the right owners via SMS and Slack.
-      </p>
-
-      <h3>Why it mattered</h3>
-      <ul>
-        <li>Shifted the org from reactive incident response to proactive detection.</li>
-        <li>Reduced mean time to detection by correlating signals across tools.</li>
-        <li>Standardized alert routing logic across teams and applications.</li>
-      </ul>
-
-      <div>
-        <span class="tag">Python</span><span class="tag">OpenSearch</span><span class="tag">Splunk</span><span class="tag">Dynatrace</span><span class="tag">Glassbox</span>
-        <span class="tag">SMS</span><span class="tag">Slack</span>
+      <div class="kpi-card">
+        <div class="kpi-value">100K+</div>
+        <div class="kpi-label">Users Supported</div>
       </div>
     </div>
 
-    <div class="card">
-      <h3>Key design decisions</h3>
-      <ul>
-        <li><strong>Normalization layer:</strong> convert platform-specific log formats into a common event model.</li>
-        <li><strong>Routing map:</strong> application + flow → owner group, escalation path, channel, severity.</li>
-        <li><strong>Noise control:</strong> deduping, suppression windows, and rate limits to prevent alert fatigue.</li>
-        <li><strong>Operational safety:</strong> “safe mode” and feature flags for rule changes.</li>
-      </ul>
-      <details>
-        <summary>Example anomaly patterns</summary>
-        <ul>
-          <li>Spike in transaction failures for a flow (e.g., login → billing → checkout).</li>
-          <li>Latency regression correlated with deployment windows.</li>
-          <li>Drop in conversion metrics paired with UI error bursts.</li>
-        </ul>
-      </details>
+    <p>
+      I bridge executive strategy and production systems. As a <strong>player‑coach</strong>, I design architectures, write code,
+      and run platforms that drive retention, observability, and cost efficiency at enterprise scale.
+      My core strengths include deep database engineering (<code>PL/SQL</code>, <code>SQL</code>, HA/DR), cloud modernization
+      (AWS, microservices), and applied ML (decile churn scoring and billing friction prediction).
+    </p>
+
+    <div class="callout" style="margin-top: 1.5rem;">
+      <strong>Portfolio note:</strong> To maintain confidentiality, this site focuses on patterns, architectures, and measurable outcomes rather than proprietary datasets or source code.
     </div>
-  </div>
+  </section>
 
-  <div class="diagram">
-    <svg viewBox="0 0 1100 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DART architecture diagram">
-      <defs>
-        <style>
-          .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
-          .t{fill:#e5e7eb;font:600 16px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .s{fill:#cbd5e1;font:500 13px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m);}
-          .l{stroke:#475569;stroke-width:1.4;fill:none;}
-        </style>
-        <marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-          <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
-        </marker>
-      </defs>
-
-      <rect class="b" x="30" y="55" width="220" height="95" />
-      <text class="t" x="55" y="90">Apps / Services</text>
-      <text class="s" x="55" y="116">Web • Mobile • APIs</text>
-
-      <rect class="b" x="290" y="30" width="220" height="65" />
-      <text class="t" x="312" y="65">OpenSearch</text>
-
-      <rect class="b" x="290" y="110" width="220" height="65" />
-      <text class="t" x="362" y="145">Splunk</text>
-
-      <rect class="b" x="290" y="190" width="220" height="65" />
-      <text class="t" x="346" y="225">Dynatrace</text>
-
-      <rect class="b" x="560" y="70" width="250" height="135" />
-      <text class="t" x="590" y="108">DART (Python)</text>
-      <text class="s" x="590" y="136">Normalize • Correlate</text>
-      <text class="s" x="590" y="160">Score • Dedup • Route</text>
-
-      <rect class="b" x="860" y="40" width="210" height="70" />
-      <text class="t" x="905" y="75">Slack Alerts</text>
-
-      <rect class="b" x="860" y="135" width="210" height="70" />
-      <text class="t" x="915" y="170">SMS Pager</text>
-
-      <rect class="b" x="860" y="230" width="210" height="70" />
-      <text class="t" x="898" y="265">Dashboards</text>
-      <text class="s" x="898" y="289">Grafana/Kibana</text>
-
-      <path class="a" d="M250,100 C280,100 270,60 290,60" />
-      <path class="a" d="M250,100 C280,100 270,140 290,140" />
-      <path class="a" d="M250,100 C280,100 270,220 290,220" />
-
-      <path class="a" d="M510,60 C545,60 530,120 560,120" />
-      <path class="a" d="M510,140 C545,140 530,140 560,140" />
-      <path class="a" d="M510,220 C545,220 530,160 560,160" />
-
-      <path class="a" d="M810,110 C835,110 830,75 860,75" />
-      <path class="a" d="M810,140 C835,140 830,170 860,170" />
-      <path class="a" d="M810,170 C835,170 830,265 860,265" />
-
-      <path class="l" d="M30,285 H1070" />
-      <text class="s" x="30" y="308">Core idea: correlate multiple telemetry sources → detect anomalies → route to owners with automated escalation.</text>
-    </svg>
-    <div class="caption">DART architecture: multi-source telemetry ingestion → normalization/correlation → anomaly scoring → automated escalation + dashboards.</div>
-  </div>
-
-  <details>
-    <summary>Operating model (how it worked in practice)</summary>
-    <ul>
-      <li><strong>Ownership mapping:</strong> Each flow had an owner group, escalation rules, and a defined response playbook.</li>
-      <li><strong>Alert hygiene:</strong> suppression windows, thresholds, and dedupe reduced false positives.</li>
-      <li><strong>Continuous tuning:</strong> weekly review of alert outcomes, tuning rules based on incident retrospectives.</li>
-    </ul>
-  </details>
-</section>
-
-<!-- ===================== ML ===================== -->
-<section id="ml">
-  <h2>Customer Churn (Decile Scoring) & Billing Friction Prediction</h2>
-
-  <div class="twoCol">
-    <div class="card">
-      <h3>What I built</h3>
-      <p>
-        Two major predictive analytics programs:
-        (1) a customer churn risk model expressed as a decile score for targeting actions at scale, and
-        (2) a billing friction prediction model to proactively reduce inbound support volume.
-      </p>
-
-      <h3>Impact</h3>
-      <ul>
-        <li><strong>>10% churn reduction</strong> through targeted interventions using risk deciles.</li>
-        <li><strong>~20% reduction in call-center volume</strong> via proactive self-service messaging.</li>
-      </ul>
-
-      <div>
-        <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">SQL</span>
-        <span class="tag">Snowflake</span><span class="tag">Redshift</span><span class="tag">Feature engineering</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Data & feature themes</h3>
-      <ul>
-        <li><strong>Usage patterns:</strong> changes in frequency, session depth, and drop-offs in key journeys.</li>
-        <li><strong>Network/quality signals:</strong> degradations correlated with churn behavior.</li>
-        <li><strong>Billing signals:</strong> payment failures, disputes, repeated retries, and timing patterns.</li>
-        <li><strong>Customer context:</strong> tenure, plan attributes, and engagement indicators.</li>
-      </ul>
-      <details>
-        <summary>Decile scoring approach (why deciles)</summary>
+  <section id="modernization">
+    <div class="project-block">
+      <div class="project-content">
+        <h2><i class="fas fa-cloud-upload-alt"></i> Cloud Modernization</h2>
         <p>
-          Deciles made the output easy to operationalize: marketing, care, and product teams could define playbooks per risk band
-          without needing model internals. It also supported consistent evaluation and stable targeting thresholds.
+          Led a large-scale transition from legacy on‑prem monoliths to a decoupled, cloud‑native architecture.
+          The effort combined database migrations with service boundary redesign, re-writing business logic and database code
+          to fit modern microservices patterns.
         </p>
-      </details>
-    </div>
-  </div>
 
-  <div class="diagram">
-    <svg viewBox="0 0 1100 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ML pipeline architecture diagram">
-      <defs>
-        <style>
-          .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
-          .t{fill:#e5e7eb;font:600 16px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .s{fill:#cbd5e1;font:500 13px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m2);}
-        </style>
-        <marker id="m2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-          <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
-        </marker>
-      </defs>
+        <div class="tag-cloud">
+          <span class="tag">AWS RDS</span><span class="tag">Aurora (PostgreSQL/Oracle)</span><span class="tag">Oracle</span><span class="tag">SQL Server</span>
+          <span class="tag">S3</span><span class="tag">Redshift</span><span class="tag">Microservices</span><span class="tag">PL/SQL</span><span class="tag">Python</span>
+        </div>
 
-      <rect class="b" x="30" y="60" width="240" height="90" />
-      <text class="t" x="55" y="95">Sources</text>
-      <text class="s" x="55" y="120">Usage • Quality • Billing</text>
+        <ul>
+          <li><strong>Action:</strong> Migrated 50+ Oracle/SQL Server databases to AWS RDS/Aurora, including schema redesign, data validation, and production cutover.</li>
+          <li><strong>Architecture:</strong> Split monoliths into service‑oriented and microservices designs by separating service, UI, and SRE layers.</li>
+          <li><strong>Result:</strong> Simplified governance and change management; improved incident isolation and reduced operational cost by ~40%.</li>
+        </ul>
 
-      <rect class="b" x="310" y="45" width="240" height="120" />
-      <text class="t" x="335" y="85">Warehouse</text>
-      <text class="s" x="335" y="112">Snowflake / Redshift</text>
-      <text class="s" x="335" y="136">SQL feature views</text>
-
-      <rect class="b" x="590" y="45" width="240" height="120" />
-      <text class="t" x="615" y="85">Modeling</text>
-      <text class="s" x="615" y="112">Python • PyTorch</text>
-      <text class="s" x="615" y="136">Train • Validate • Score</text>
-
-      <rect class="b" x="870" y="30" width="200" height="75" />
-      <text class="t" x="900" y="65">Decile Scores</text>
-
-      <rect class="b" x="870" y="125" width="200" height="75" />
-      <text class="t" x="892" y="160">Proactive Actions</text>
-      <text class="s" x="892" y="182">Messaging / Playbooks</text>
-
-      <rect class="b" x="310" y="185" width="760" height="85" />
-      <text class="t" x="335" y="220">Monitoring & Governance</text>
-      <text class="s" x="335" y="246">Data quality checks • drift checks • KPI tracking • auditability</text>
-
-      <path class="a" d="M270,105 C300,105 290,105 310,105" />
-      <path class="a" d="M550,105 C580,105 570,105 590,105" />
-      <path class="a" d="M830,90 C855,90 845,70 870,70" />
-      <path class="a" d="M830,120 C855,120 845,160 870,160" />
-
-      <path class="a" d="M430,165 C430,175 430,185 430,190" />
-      <path class="a" d="M710,165 C710,175 710,185 710,190" />
-      <path class="a" d="M970,200 C970,205 970,205 970,210" />
-
-    </svg>
-    <div class="caption">Predictive pipeline: feature engineering in Snowflake/Redshift → Python/PyTorch modeling → decile scoring → operational playbooks with monitoring & governance.</div>
-  </div>
-
-  <details>
-    <summary>How results were operationalized</summary>
-    <ul>
-      <li><strong>Churn:</strong> decile buckets mapped to outreach and retention offers, with uplift tracking by cohort.</li>
-      <li><strong>Billing friction:</strong> predicted likelihood triggered proactive self-service prompts and targeted notifications.</li>
-      <li><strong>Feedback loop:</strong> outcome metrics fed back to feature updates and threshold tuning.</li>
-    </ul>
-  </details>
-</section>
-
-<!-- ===================== Omni ===================== -->
-<section id="omni">
-  <h2>Omni-Channel Analytics Platform</h2>
-
-  <div class="twoCol">
-    <div class="card">
-      <h3>Problem</h3>
-      <p>
-        Customer engagement data lived across multiple systems with high volume and near real-time needs.
-        Teams needed a unified view across touchpoints (web, mobile, self-service) to measure digital adoption,
-        campaign outcomes, and journey drop-offs.
-      </p>
-
-      <h3>What I did</h3>
-      <ul>
-        <li>Designed data integration across systems to provide consistent, reliable analytics.</li>
-        <li>Implemented HA/DR and cross-region replication to meet availability expectations.</li>
-        <li>Optimized performance through RAC scaling and workload distribution.</li>
-      </ul>
+        <details>
+          <summary>Design decisions (what interviewers ask)</summary>
+          <ul>
+            <li>Cutover strategy: staged migrations, dual-run validation, and rollback plans.</li>
+            <li>Schema evolution: versioning, compatibility rules, and conversion patterns.</li>
+            <li>Operability: standard logging/metrics and clear ownership per service boundary.</li>
+          </ul>
+        </details>
+      </div>
 
       <div>
-        <span class="tag">Oracle RAC</span><span class="tag">Data Guard</span><span class="tag">GoldenGate</span><span class="tag">SharePlex</span>
-        <span class="tag">PL/SQL</span><span class="tag">SQL</span>
+        <div class="diagram-box" aria-label="Cloud modernization diagram">
+          <svg viewBox="0 0 1100 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Migration and modernization architecture diagram">
+            <defs>
+              <style>
+                .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
+                .t{fill:#e5e7eb;font:600 16px Inter,system-ui,sans-serif;}
+                .s{fill:#cbd5e1;font:500 13px Inter,system-ui,sans-serif;}
+                .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m5);}
+              </style>
+              <marker id="m5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
+              </marker>
+            </defs>
+
+            <rect class="b" x="30" y="70" width="250" height="90" />
+            <text class="t" x="55" y="105">Legacy Monolith</text>
+            <text class="s" x="55" y="132">Oracle / SQL Server</text>
+
+            <rect class="b" x="330" y="40" width="230" height="70" />
+            <text class="t" x="350" y="75">Service Layer</text>
+            <text class="s" x="350" y="97">APIs • domain logic</text>
+
+            <rect class="b" x="330" y="130" width="230" height="70" />
+            <text class="t" x="375" y="165">UI Layer</text>
+            <text class="s" x="350" y="187">Web • App</text>
+
+            <rect class="b" x="610" y="40" width="230" height="70" />
+            <text class="t" x="642" y="75">SRE Layer</text>
+            <text class="s" x="625" y="97">Logging • Alerts • SLOs</text>
+
+            <rect class="b" x="610" y="130" width="230" height="70" />
+            <text class="t" x="645" y="165">Data Layer</text>
+            <text class="s" x="625" y="187">RDS/Aurora (PG/Oracle)</text>
+
+            <rect class="b" x="890" y="85" width="190" height="95" />
+            <text class="t" x="915" y="120">Analytics</text>
+            <text class="s" x="915" y="146">S3 • Redshift</text>
+            <text class="s" x="915" y="170">Snowflake</text>
+
+            <path class="a" d="M280,115 C305,115 305,75 330,75" />
+            <path class="a" d="M280,115 C305,115 305,165 330,165" />
+            <path class="a" d="M560,75 C585,75 585,75 610,75" />
+            <path class="a" d="M560,165 C585,165 585,165 610,165" />
+            <path class="a" d="M840,165 C865,165 865,140 890,140" />
+          </svg>
+        </div>
+        <div class="diagram-caption">Reference architecture: monolith split into service/UI/SRE layers → cloud data layer → analytics platforms for insights and governance.</div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>Reliability & scale approach</h3>
-      <ul>
-        <li><strong>Scale-out:</strong> RAC node extension + load distribution for peak volumes.</li>
-        <li><strong>DR:</strong> Data Guard for standby, GoldenGate/SharePlex for replication patterns as needed.</li>
-        <li><strong>Consistency:</strong> governed schemas + validation routines to keep KPIs trustworthy.</li>
-        <li><strong>Latency:</strong> tuned PL/SQL and query patterns for operational SLAs.</li>
-      </ul>
-      <details>
-        <summary>Typical pipeline patterns</summary>
+  <section id="observability">
+    <div class="project-block">
+      <div>
+        <div class="diagram-box" aria-label="DART diagram">
+          <svg viewBox="0 0 1100 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DART architecture diagram">
+            <defs>
+              <style>
+                .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
+                .t{fill:#e5e7eb;font:600 16px Inter,system-ui,sans-serif;}
+                .s{fill:#cbd5e1;font:500 13px Inter,system-ui,sans-serif;}
+                .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m1);}
+                .l{stroke:#475569;stroke-width:1.4;fill:none;}
+              </style>
+              <marker id="m1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
+              </marker>
+            </defs>
+
+            <rect class="b" x="30" y="55" width="220" height="95" />
+            <text class="t" x="55" y="90">Apps / Services</text>
+            <text class="s" x="55" y="116">Web • Mobile • APIs</text>
+
+            <rect class="b" x="290" y="30" width="220" height="65" />
+            <text class="t" x="312" y="65">OpenSearch</text>
+
+            <rect class="b" x="290" y="110" width="220" height="65" />
+            <text class="t" x="362" y="145">Splunk</text>
+
+            <rect class="b" x="290" y="190" width="220" height="65" />
+            <text class="t" x="346" y="225">Dynatrace</text>
+
+            <rect class="b" x="560" y="70" width="250" height="135" />
+            <text class="t" x="590" y="108">DART (Python)</text>
+            <text class="s" x="590" y="136">Normalize • Correlate</text>
+            <text class="s" x="590" y="160">Score • Dedup • Route</text>
+
+            <rect class="b" x="860" y="40" width="210" height="70" />
+            <text class="t" x="905" y="75">Slack Alerts</text>
+
+            <rect class="b" x="860" y="135" width="210" height="70" />
+            <text class="t" x="915" y="170">SMS Pager</text>
+
+            <rect class="b" x="860" y="230" width="210" height="70" />
+            <text class="t" x="898" y="265">Dashboards</text>
+            <text class="s" x="898" y="289">Grafana/Kibana</text>
+
+            <path class="a" d="M250,100 C280,100 270,60 290,60" />
+            <path class="a" d="M250,100 C280,100 270,140 290,140" />
+            <path class="a" d="M250,100 C280,100 270,220 290,220" />
+
+            <path class="a" d="M510,60 C545,60 530,120 560,120" />
+            <path class="a" d="M510,140 C545,140 530,140 560,140" />
+            <path class="a" d="M510,220 C545,220 530,160 560,160" />
+
+            <path class="a" d="M810,110 C835,110 830,75 860,75" />
+            <path class="a" d="M810,140 C835,140 830,170 860,170" />
+            <path class="a" d="M810,170 C835,170 830,265 860,265" />
+
+            <path class="l" d="M30,285 H1070" />
+            <text class="s" x="30" y="308">Correlate multiple telemetry sources → detect anomalies → route to owners with automated escalation.</text>
+          </svg>
+        </div>
+        <div class="diagram-caption">DART pipeline: multi‑source telemetry ingestion → normalization/correlation → anomaly scoring → automated escalation + dashboards.</div>
+      </div>
+
+      <div class="project-content">
+        <h2><i class="fas fa-eye"></i> DART: Real-Time Observability</h2>
+        <p>
+          Built the <strong>Digital Alert & Reporting Technology</strong> (DART) framework to catch “silent failures” across complex customer journeys.
+          DART correlates error bursts, latency regressions, and conversion drops across tools—then routes alerts to the right owners.
+        </p>
+
+        <div class="tag-cloud">
+          <span class="tag">Python</span><span class="tag">OpenSearch</span><span class="tag">Splunk</span><span class="tag">Dynatrace</span><span class="tag">Glassbox</span>
+          <span class="tag">Slack</span><span class="tag">SMS</span><span class="tag">Grafana</span>
+        </div>
+
         <ul>
-          <li>Event ingestion → staging tables → curated fact tables → KPI views.</li>
-          <li>Incremental loads with idempotent processing for replays and recoveries.</li>
-          <li>Partitioning strategies aligned to access patterns.</li>
+          <li><strong>Mechanism:</strong> Normalized events across sources; correlated spikes by flow (login → billing → checkout) and deployment windows.</li>
+          <li><strong>Automation:</strong> Dynamic SMS/Slack alerting based on application ownership and transaction routing map.</li>
+          <li><strong>Operations:</strong> Alert hygiene (dedupe/suppression) + playbooks to reduce noise and speed response.</li>
         </ul>
-      </details>
+
+        <details>
+          <summary>Key design decisions</summary>
+          <ul>
+            <li><strong>Normalization layer:</strong> platform-specific formats → common event model.</li>
+            <li><strong>Routing map:</strong> flow → owner group, escalation path, channel, severity.</li>
+            <li><strong>Noise control:</strong> suppression windows and rate limits to prevent alert storms.</li>
+          </ul>
+        </details>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="diagram">
-    <svg viewBox="0 0 1100 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Omni-channel analytics architecture diagram">
-      <defs>
-        <style>
-          .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
-          .t{fill:#e5e7eb;font:600 16px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .s{fill:#cbd5e1;font:500 13px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m3);}
-        </style>
-        <marker id="m3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-          <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
-        </marker>
-      </defs>
+  <section id="ml">
+    <div class="project-block">
+      <div class="project-content">
+        <h2><i class="fas fa-brain"></i> Predictive ML: Churn Deciles & Billing Friction</h2>
+        <p>
+          Operationalized ML models that identify churn risk and billing friction at the individual customer level.
+          Outputs were expressed as <strong>decile scores</strong> to drive consistent playbooks at scale.
+        </p>
 
-      <rect class="b" x="30" y="40" width="240" height="75" />
-      <text class="t" x="55" y="72">Touchpoints</text>
-      <text class="s" x="55" y="96">Web • Mobile • Portal</text>
+        <div class="tag-cloud">
+          <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">SQL</span><span class="tag">Snowflake</span><span class="tag">Redshift</span>
+          <span class="tag">Feature Engineering</span><span class="tag">Governance</span>
+        </div>
 
-      <rect class="b" x="30" y="140" width="240" height="75" />
-      <text class="t" x="55" y="172">Operational Systems</text>
-      <text class="s" x="55" y="196">Billing • Orders • CRM</text>
+        <ul>
+          <li><strong>Churn model:</strong> Decile-based scoring used to target interventions; contributed to <strong>>10%</strong> churn reduction.</li>
+          <li><strong>Billing friction:</strong> Predictive triggers for proactive self-service messaging, reducing support volume by <strong>~20%</strong>.</li>
+          <li><strong>Platform:</strong> Feature views in Snowflake/Redshift; training/scoring in Python/PyTorch; monitoring for drift and KPI impact.</li>
+        </ul>
 
-      <rect class="b" x="320" y="70" width="250" height="115" />
-      <text class="t" x="345" y="105">Ingestion Layer</text>
-      <text class="s" x="345" y="132">ETL/Streaming</text>
-      <text class="s" x="345" y="156">Validation + DQ checks</text>
-
-      <rect class="b" x="610" y="55" width="250" height="145" />
-      <text class="t" x="635" y="90">Oracle RAC</text>
-      <text class="s" x="635" y="118">Facts • Aggregations</text>
-      <text class="s" x="635" y="142">KPI views (SQL/PLSQL)</text>
-      <text class="s" x="635" y="166">Performance tuning</text>
-
-      <rect class="b" x="610" y="215" width="250" height="75" />
-      <text class="t" x="635" y="250">Replication / DR</text>
-      <text class="s" x="635" y="274">Data Guard • GoldenGate</text>
-
-      <rect class="b" x="900" y="75" width="180" height="95" />
-      <text class="t" x="925" y="110">BI / Dashboards</text>
-      <text class="s" x="925" y="136">Tableau/Grafana</text>
-
-      <path class="a" d="M270,78 C300,78 295,110 320,110" />
-      <path class="a" d="M270,178 C300,178 295,145 320,145" />
-      <path class="a" d="M570,128 C595,128 585,120 610,120" />
-      <path class="a" d="M860,120 C885,120 880,122 900,122" />
-      <path class="a" d="M735,200 C735,205 735,210 735,215" />
-    </svg>
-    <div class="caption">Omni-channel analytics: unify multiple customer touchpoints → ingestion + DQ → RAC analytics core → BI with HA/DR via Data Guard/GoldenGate.</div>
-  </div>
-</section>
-
-<!-- ===================== GCS ===================== -->
-<section id="gcs">
-  <h2>Global Cookie Sharing (GCS)</h2>
-
-  <div class="twoCol">
-    <div class="card">
-      <h3>Problem</h3>
-      <p>
-        Cookie-based session handling across multiple applications created inconsistent state, brittle integrations,
-        and security challenges. The goal was a centralized, reliable session service for stateful applications.
-      </p>
-
-      <h3>Solution</h3>
-      <ul>
-        <li>Built a centralized session store and retrieval service for hashed token management.</li>
-        <li>Implemented timed authentication and session lifecycle controls.</li>
-        <li>Reduced coupling between applications by removing cookie dependency patterns.</li>
-      </ul>
+        <details>
+          <summary>How it was made usable (beyond accuracy)</summary>
+          <ul>
+            <li>Deciles mapped directly to retention playbooks and outreach tiers.</li>
+            <li>Outcome tracking focused on uplift and cost-to-serve reduction.</li>
+            <li>Thresholds tuned over time using feedback loops and cohort analysis.</li>
+          </ul>
+        </details>
+      </div>
 
       <div>
-        <span class="tag">Oracle Coherence</span><span class="tag">PL/SQL</span><span class="tag">Distributed state</span><span class="tag">Token lifecycle</span>
+        <div class="diagram-box" aria-label="ML diagram">
+          <svg viewBox="0 0 1100 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ML pipeline architecture diagram">
+            <defs>
+              <style>
+                .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
+                .t{fill:#e5e7eb;font:600 16px Inter,system-ui,sans-serif;}
+                .s{fill:#cbd5e1;font:500 13px Inter,system-ui,sans-serif;}
+                .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m2);}
+              </style>
+              <marker id="m2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
+              </marker>
+            </defs>
+
+            <rect class="b" x="30" y="60" width="240" height="90" />
+            <text class="t" x="55" y="95">Sources</text>
+            <text class="s" x="55" y="120">Usage • Quality • Billing</text>
+
+            <rect class="b" x="310" y="45" width="240" height="120" />
+            <text class="t" x="335" y="85">Warehouse</text>
+            <text class="s" x="335" y="112">Snowflake / Redshift</text>
+            <text class="s" x="335" y="136">SQL feature views</text>
+
+            <rect class="b" x="590" y="45" width="240" height="120" />
+            <text class="t" x="615" y="85">Modeling</text>
+            <text class="s" x="615" y="112">Python • PyTorch</text>
+            <text class="s" x="615" y="136">Train • Validate • Score</text>
+
+            <rect class="b" x="870" y="30" width="200" height="75" />
+            <text class="t" x="900" y="65">Decile Scores</text>
+
+            <rect class="b" x="870" y="125" width="200" height="75" />
+            <text class="t" x="892" y="160">Proactive Actions</text>
+            <text class="s" x="892" y="182">Messaging / Playbooks</text>
+
+            <rect class="b" x="310" y="185" width="760" height="85" />
+            <text class="t" x="335" y="220">Monitoring & Governance</text>
+            <text class="s" x="335" y="246">DQ checks • drift checks • KPI tracking • auditability</text>
+
+            <path class="a" d="M270,105 C300,105 290,105 310,105" />
+            <path class="a" d="M550,105 C580,105 570,105 590,105" />
+            <path class="a" d="M830,90 C855,90 845,70 870,70" />
+            <path class="a" d="M830,120 C855,120 845,160 870,160" />
+
+            <path class="a" d="M430,165 C430,175 430,185 430,190" />
+            <path class="a" d="M710,165 C710,175 710,185 710,190" />
+            <path class="a" d="M970,200 C970,205 970,205 970,210" />
+          </svg>
+        </div>
+        <div class="diagram-caption">MLOps workflow: warehouse feature views → Python/PyTorch modeling → decile scoring → operational playbooks with governance.</div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>Engineering details</h3>
-      <ul>
-        <li><strong>State model:</strong> token → session record, TTL, renewal rules, invalidation.</li>
-        <li><strong>Performance:</strong> optimized PL/SQL routines for hot paths.</li>
-        <li><strong>Security:</strong> hashed token handling, timed auth, and controlled access patterns.</li>
-        <li><strong>Resilience:</strong> design for partial failures and safe fallbacks.</li>
-      </ul>
-      <details>
-        <summary>What interviewers usually ask about GCS</summary>
+  <section id="omni">
+    <div class="project-block">
+      <div class="project-content">
+        <h2><i class="fas fa-diagram-project"></i> Omni‑Channel Analytics</h2>
+        <p>
+          Unified customer engagement analytics across web, mobile, and self‑service systems. The platform handled high data volume,
+          required near real‑time availability, and demanded strong HA/DR.
+        </p>
+
+        <div class="tag-cloud">
+          <span class="tag">Oracle RAC</span><span class="tag">Data Guard</span><span class="tag">GoldenGate</span><span class="tag">SharePlex</span>
+          <span class="tag">PL/SQL</span><span class="tag">SQL</span><span class="tag">BI</span>
+        </div>
+
         <ul>
-          <li>How did you choose TTL and refresh behavior?</li>
-          <li>How did you prevent replay and token leakage risks?</li>
-          <li>How did you handle cache misses and state rebuild?</li>
+          <li><strong>Scale:</strong> RAC node extension and load distribution for peak volumes.</li>
+          <li><strong>Availability:</strong> Data Guard standby + GoldenGate/SharePlex replication patterns based on RPO/RTO needs.</li>
+          <li><strong>Trust:</strong> governed schemas, validation routines, and KPI views for consistent reporting.</li>
         </ul>
-      </details>
-    </div>
-  </div>
 
-  <div class="diagram">
-    <svg viewBox="0 0 1100 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GCS architecture diagram">
-      <defs>
-        <style>
-          .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
-          .t{fill:#e5e7eb;font:600 16px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .s{fill:#cbd5e1;font:500 13px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m4);}
-        </style>
-        <marker id="m4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-          <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
-        </marker>
-      </defs>
-
-      <rect class="b" x="30" y="80" width="250" height="95" />
-      <text class="t" x="55" y="115">Applications</text>
-      <text class="s" x="55" y="142">Web • Mobile • APIs</text>
-
-      <rect class="b" x="330" y="60" width="260" height="135" />
-      <text class="t" x="355" y="95">GCS Service</text>
-      <text class="s" x="355" y="122">Token API</text>
-      <text class="s" x="355" y="146">Session lifecycle</text>
-      <text class="s" x="355" y="170">Timed authentication</text>
-
-      <rect class="b" x="640" y="45" width="240" height="165" />
-      <text class="t" x="665" y="80">Coherence Cache</text>
-      <text class="s" x="665" y="108">In-memory sessions</text>
-      <text class="s" x="665" y="132">TTL • invalidation</text>
-      <text class="s" x="665" y="156">Hot-path reads</text>
-
-      <rect class="b" x="920" y="80" width="160" height="95" />
-      <text class="t" x="940" y="115">Oracle DB</text>
-      <text class="s" x="940" y="142">PL/SQL logic</text>
-
-      <path class="a" d="M280,128 C305,128 305,128 330,128" />
-      <path class="a" d="M590,128 C615,128 615,128 640,128" />
-      <path class="a" d="M880,128 C900,128 900,128 920,128" />
-    </svg>
-    <div class="caption">GCS: applications call a centralized session API → Coherence provides hot-path state → Oracle/PLSQL backs lifecycle rules and governance.</div>
-  </div>
-</section>
-
-<!-- ===================== Migration ===================== -->
-<section id="migration">
-  <h2>Cloud Migration & Microservices Modernization</h2>
-
-  <div class="twoCol">
-    <div class="card">
-      <h3>What changed</h3>
-      <p>
-        Led migration of 50+ on-prem Oracle and SQL Server databases to AWS RDS and Aurora (PostgreSQL/Oracle).
-        In parallel, modernized monolithic applications to service-oriented and microservices-based architectures.
-      </p>
-
-      <h3>Architecture approach</h3>
-      <ul>
-        <li><strong>Decoupling layers:</strong> separated service layer, UI layer, and SRE/operations layers.</li>
-        <li><strong>Rewrites:</strong> refactored business logic and database development to fit the new service boundaries.</li>
-        <li><strong>Governance:</strong> tighter controls on data access patterns and compliance/audit readiness.</li>
-        <li><strong>Operability:</strong> faster issue identification through standardized logging and ownership.</li>
-      </ul>
+        <details>
+          <summary>Interview-ready talking points</summary>
+          <ul>
+            <li>Choosing replication tech: Data Guard vs GoldenGate vs SharePlex (trade-offs and fit).</li>
+            <li>Partitioning and query tuning strategies for mixed workloads.</li>
+            <li>Idempotent incremental loads and replay strategies.</li>
+          </ul>
+        </details>
+      </div>
 
       <div>
-        <span class="tag">AWS RDS</span><span class="tag">Aurora</span><span class="tag">PostgreSQL</span><span class="tag">Oracle</span>
-        <span class="tag">SQL Server</span><span class="tag">Microservices</span>
+        <div class="diagram-box" aria-label="Omni-channel diagram">
+          <svg viewBox="0 0 1100 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Omni-channel analytics architecture diagram">
+            <defs>
+              <style>
+                .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
+                .t{fill:#e5e7eb;font:600 16px Inter,system-ui,sans-serif;}
+                .s{fill:#cbd5e1;font:500 13px Inter,system-ui,sans-serif;}
+                .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m3);}
+              </style>
+              <marker id="m3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
+              </marker>
+            </defs>
+
+            <rect class="b" x="30" y="40" width="240" height="75" />
+            <text class="t" x="55" y="72">Touchpoints</text>
+            <text class="s" x="55" y="96">Web • Mobile • Portal</text>
+
+            <rect class="b" x="30" y="140" width="240" height="75" />
+            <text class="t" x="55" y="172">Operational Systems</text>
+            <text class="s" x="55" y="196">Billing • Orders • CRM</text>
+
+            <rect class="b" x="320" y="70" width="250" height="115" />
+            <text class="t" x="345" y="105">Ingestion Layer</text>
+            <text class="s" x="345" y="132">ETL/Streaming</text>
+            <text class="s" x="345" y="156">Validation + DQ checks</text>
+
+            <rect class="b" x="610" y="55" width="250" height="145" />
+            <text class="t" x="635" y="90">Oracle RAC</text>
+            <text class="s" x="635" y="118">Facts • Aggregations</text>
+            <text class="s" x="635" y="142">KPI views (SQL/PLSQL)</text>
+            <text class="s" x="635" y="166">Performance tuning</text>
+
+            <rect class="b" x="610" y="215" width="250" height="75" />
+            <text class="t" x="635" y="250">Replication / DR</text>
+            <text class="s" x="635" y="274">Data Guard • GoldenGate</text>
+
+            <rect class="b" x="900" y="75" width="180" height="95" />
+            <text class="t" x="925" y="110">BI / Dashboards</text>
+            <text class="s" x="925" y="136">Tableau/Grafana</text>
+
+            <path class="a" d="M270,78 C300,78 295,110 320,110" />
+            <path class="a" d="M270,178 C300,178 295,145 320,145" />
+            <path class="a" d="M570,128 C595,128 585,120 610,120" />
+            <path class="a" d="M860,120 C885,120 880,122 900,122" />
+            <path class="a" d="M735,200 C735,205 735,210 735,215" />
+          </svg>
+        </div>
+        <div class="diagram-caption">Unify touchpoints → ingestion + data quality → RAC analytics core → BI with HA/DR via Data Guard/GoldenGate.</div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>How it improved the business</h3>
-      <ul>
-        <li>Better change management and faster deployments due to smaller service boundaries.</li>
-        <li>Improved compliance posture through clearer data ownership and access controls.</li>
-        <li>Shorter incident resolution times from better observability + clear ownership.</li>
-        <li>Reduced licensing and infrastructure costs through cloud-native replacements.</li>
-      </ul>
+  <section id="gcs">
+    <div class="project-block">
+      <div>
+        <div class="diagram-box" aria-label="GCS diagram">
+          <svg viewBox="0 0 1100 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GCS architecture diagram">
+            <defs>
+              <style>
+                .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
+                .t{fill:#e5e7eb;font:600 16px Inter,system-ui,sans-serif;}
+                .s{fill:#cbd5e1;font:500 13px Inter,system-ui,sans-serif;}
+                .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m4);}
+              </style>
+              <marker id="m4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
+              </marker>
+            </defs>
 
-      <details>
-        <summary>Typical migration playbook</summary>
+            <rect class="b" x="30" y="80" width="250" height="95" />
+            <text class="t" x="55" y="115">Applications</text>
+            <text class="s" x="55" y="142">Web • Mobile • APIs</text>
+
+            <rect class="b" x="330" y="60" width="260" height="135" />
+            <text class="t" x="355" y="95">GCS Service</text>
+            <text class="s" x="355" y="122">Token API</text>
+            <text class="s" x="355" y="146">Session lifecycle</text>
+            <text class="s" x="355" y="170">Timed authentication</text>
+
+            <rect class="b" x="640" y="45" width="240" height="165" />
+            <text class="t" x="665" y="80">Coherence Cache</text>
+            <text class="s" x="665" y="108">In-memory sessions</text>
+            <text class="s" x="665" y="132">TTL • invalidation</text>
+            <text class="s" x="665" y="156">Hot-path reads</text>
+
+            <rect class="b" x="920" y="80" width="160" height="95" />
+            <text class="t" x="940" y="115">Oracle DB</text>
+            <text class="s" x="940" y="142">PL/SQL logic</text>
+
+            <path class="a" d="M280,128 C305,128 305,128 330,128" />
+            <path class="a" d="M590,128 C615,128 615,128 640,128" />
+            <path class="a" d="M880,128 C900,128 900,128 920,128" />
+          </svg>
+        </div>
+        <div class="diagram-caption">GCS: centralized session API → Coherence hot-path state → Oracle/PLSQL lifecycle rules and governance.</div>
+      </div>
+
+      <div class="project-content">
+        <h2><i class="fas fa-cookie-bite"></i> Global Cookie Sharing (GCS)</h2>
+        <p>
+          Designed a centralized session management service to replace brittle cookie-based state across applications.
+          The system improved consistency, reduced coupling, and strengthened security controls around session lifecycle.
+        </p>
+
+        <div class="tag-cloud">
+          <span class="tag">Oracle Coherence</span><span class="tag">PL/SQL</span><span class="tag">Token lifecycle</span><span class="tag">Timed authentication</span>
+        </div>
+
         <ul>
-          <li>Inventory & dependency mapping → schema conversion strategy → validation rules.</li>
-          <li>Dual-write / replication where needed → staged cutovers → performance soak.</li>
-          <li>Post-cutover hardening: indexes, query plans, partitioning, and cost reviews.</li>
+          <li><strong>State model:</strong> token → session record with TTL, renewal rules, invalidation policies.</li>
+          <li><strong>Performance:</strong> optimized PL/SQL routines for hot paths and predictable latency.</li>
+          <li><strong>Security:</strong> hashed token handling and controlled access patterns to reduce replay risk.</li>
         </ul>
-      </details>
+
+        <details>
+          <summary>Common interview follow-ups</summary>
+          <ul>
+            <li>How TTL and refresh behavior were chosen to balance UX vs security.</li>
+            <li>Cache miss handling and state rebuild strategies.</li>
+            <li>Failure modes and safe fallbacks.</li>
+          </ul>
+        </details>
+      </div>
     </div>
-  </div>
+  </section>
+  <section id="principles">
+    <h2><i class="fas fa-sitemap"></i> Architecture Principles</h2>
+    <p>
+      Across projects, I optimize for reliability, operability, and governance—without slowing delivery. The patterns below summarize how I design systems that scale.
+    </p>
 
-  <div class="diagram">
-    <svg viewBox="0 0 1100 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Migration and modernization architecture diagram">
-      <defs>
-        <style>
-          .b{fill:#0b1220;stroke:#334155;stroke-width:1.4;rx:16;}
-          .t{fill:#e5e7eb;font:600 16px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .s{fill:#cbd5e1;font:500 13px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;}
-          .a{stroke:#93c5fd;stroke-width:2;fill:none;marker-end:url(#m5);}
-        </style>
-        <marker id="m5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-          <path d="M0,0 L10,3 L0,6 Z" fill="#93c5fd" />
-        </marker>
-      </defs>
-
-      <rect class="b" x="30" y="70" width="250" height="90" />
-      <text class="t" x="55" y="105">Legacy Monolith</text>
-      <text class="s" x="55" y="132">Oracle / SQL Server</text>
-
-      <rect class="b" x="330" y="40" width="230" height="70" />
-      <text class="t" x="350" y="75">Service Layer</text>
-      <text class="s" x="350" y="97">APIs • domain logic</text>
-
-      <rect class="b" x="330" y="130" width="230" height="70" />
-      <text class="t" x="375" y="165">UI Layer</text>
-      <text class="s" x="350" y="187">Web • App</text>
-
-      <rect class="b" x="610" y="40" width="230" height="70" />
-      <text class="t" x="642" y="75">SRE Layer</text>
-      <text class="s" x="625" y="97">Logging • Alerts • SLOs</text>
-
-      <rect class="b" x="610" y="130" width="230" height="70" />
-      <text class="t" x="645" y="165">Data Layer</text>
-      <text class="s" x="625" y="187">RDS/Aurora (PG/Oracle)</text>
-
-      <rect class="b" x="890" y="85" width="190" height="95" />
-      <text class="t" x="915" y="120">Analytics</text>
-      <text class="s" x="915" y="146">S3 • Redshift</text>
-      <text class="s" x="915" y="170">Snowflake</text>
-
-      <path class="a" d="M280,115 C305,115 305,75 330,75" />
-      <path class="a" d="M280,115 C305,115 305,165 330,165" />
-      <path class="a" d="M560,75 C585,75 585,75 610,75" />
-      <path class="a" d="M560,165 C585,165 585,165 610,165" />
-      <path class="a" d="M840,165 C865,165 865,140 890,140" />
-    </svg>
-    <div class="caption">Modernization: monolith split into service/UI/SRE layers → cloud data layer → analytics platforms for insights and governance.</div>
-  </div>
-</section>
-
-<!-- ===================== Walkthrough ===================== -->
-<section id="walkthrough">
-  <h2>System Design Walkthrough (Interview-Ready)</h2>
-  <p>
-    This page is structured the way Staff/Principal interviews run: clarify goals, present architecture, discuss trade-offs,
-    and show how you operated the system in production.
-  </p>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Walkthrough 1: DART</h3>
-      <ul>
-        <li><strong>Goal:</strong> detect production anomalies before customer impact.</li>
-        <li><strong>Constraints:</strong> multiple telemetry platforms, noisy signals, many owner teams.</li>
-        <li><strong>Core choices:</strong> normalization, correlation, dedupe, routing map, escalation.</li>
-        <li><strong>Ops:</strong> on-call playbooks, alert hygiene, continuous tuning via retrospectives.</li>
-      </ul>
-      <details>
-        <summary>Common follow-ups</summary>
-        <ul>
-          <li>How did you measure false positives and alert quality?</li>
-          <li>How did you prevent alert storms during incidents?</li>
-          <li>What did you do when the telemetry source was partially down?</li>
+    <div class="project-block" style="grid-template-columns: 1fr; gap: 1.5rem;">
+      <div class="callout">
+        <h3 style="margin:0 0 0.5rem;">Reliability & High Availability</h3>
+        <ul style="margin:0; padding-left: 1.2rem;">
+          <li>HA/DR design using <code>Oracle RAC</code>, <code>Data Guard</code>, <code>GoldenGate</code>, and <code>SharePlex</code> based on RPO/RTO goals.</li>
+          <li>Capacity planning, performance tuning, and safe cutovers for mission-critical workloads.</li>
         </ul>
-      </details>
-    </div>
+      </div>
 
-    <div class="card">
-      <h3>Walkthrough 2: Churn deciles + Billing friction</h3>
-      <ul>
-        <li><strong>Goal:</strong> operationalize prediction at scale with clear playbooks.</li>
-        <li><strong>Data:</strong> warehouse feature views (Snowflake/Redshift) + Python modeling.</li>
-        <li><strong>Outputs:</strong> deciles + action triggers; monitored via KPI and drift checks.</li>
-        <li><strong>Result:</strong> churn reduction and lower support volume.</li>
-      </ul>
-      <details>
-        <summary>Common follow-ups</summary>
-        <ul>
-          <li>How did you design features and prevent leakage?</li>
-          <li>How did you validate uplift, not just accuracy?</li>
-          <li>How did you keep the model stable over time?</li>
+      <div class="callout">
+        <h3 style="margin:0 0 0.5rem;">Operability & Observability</h3>
+        <ul style="margin:0; padding-left: 1.2rem;">
+          <li>Standard telemetry patterns and ownership routing to speed detection and resolution.</li>
+          <li>Automated alerting and dashboards using <code>OpenSearch</code>, <code>Splunk</code>, <code>Dynatrace</code>, <code>Grafana</code>, and messaging automation.</li>
         </ul>
-      </details>
-    </div>
+      </div>
 
-    <div class="card">
-      <h3>Walkthrough 3: Omni-channel analytics</h3>
-      <ul>
-        <li><strong>Goal:</strong> unify engagement metrics with high availability.</li>
-        <li><strong>Core:</strong> RAC for scale + Data Guard/GoldenGate/SharePlex for DR/replication.</li>
-        <li><strong>Engineering depth:</strong> partitioning, query tuning, incremental loads, idempotency.</li>
-      </ul>
-      <details>
-        <summary>Common follow-ups</summary>
-        <ul>
-          <li>How did you decide between Data Guard vs GoldenGate?</li>
-          <li>What were your RTO/RPO targets and how did you meet them?</li>
-          <li>How did you ensure KPI consistency across sources?</li>
+      <div class="callout">
+        <h3 style="margin:0 0 0.5rem;">Governance & Trust</h3>
+        <ul style="margin:0; padding-left: 1.2rem;">
+          <li>Self-service analytics with governed KPIs, access controls, and auditability.</li>
+          <li>Data quality checks and monitoring for key pipelines and predictive outputs.</li>
         </ul>
-      </details>
-    </div>
+      </div>
 
-    <div class="card">
-      <h3>Walkthrough 4: Cloud migration + microservices</h3>
-      <ul>
-        <li><strong>Goal:</strong> reduce cost and increase operability without breaking critical flows.</li>
-        <li><strong>Work:</strong> schema redesign, logic rewrites, validation, staged cutovers.</li>
-        <li><strong>Architecture:</strong> service/UI/SRE separation for governance and incident isolation.</li>
-      </ul>
-      <details>
-        <summary>Common follow-ups</summary>
-        <ul>
-          <li>How did you verify correctness during cutover?</li>
-          <li>What was your rollback plan?</li>
-          <li>How did you manage schema drift and versioning?</li>
+      <div class="callout">
+        <h3 style="margin:0 0 0.5rem;">ML That Ships</h3>
+        <ul style="margin:0; padding-left: 1.2rem;">
+          <li>Feature pipelines in <code>Snowflake</code>/<code>Redshift</code> with scoring in <code>Python</code>/<code>PyTorch</code>.</li>
+          <li>Outputs designed for operational use (e.g., deciles and triggers), tied to measurable outcomes.</li>
         </ul>
-      </details>
+      </div>
     </div>
-  </div>
-
-  <p class="caption">If you want, I can tailor this walkthrough to a specific company interview style (Amazon vs Google vs Meta) and generate a PDF “talk track” you can rehearse.</p>
-</section>
+  </section>
+</div>
 
 <footer>
-  <p>© Samar Bhattarai • Engineering Portfolio Microsite • <a href="#top">Back to top</a></p>
+  <div class="container">
+    <p>Built with <i class="fas fa-code"></i> by Samar Bhattarai • © 2026</p>
+  </div>
 </footer>
 
 </body>
